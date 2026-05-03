@@ -42,7 +42,7 @@ export function CprMode({ onExit }: { onExit: () => void }) {
 
   const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
   const ss = String(elapsed % 60).padStart(2, "0");
-  const callEmergency = () => { if (typeof window !== "undefined") window.location.href = "tel:911"; };
+  const callEmergency = () => { if (typeof window !== "undefined") window.location.href = "tel:112"; };
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-background text-foreground">
@@ -99,7 +99,7 @@ export function CprMode({ onExit }: { onExit: () => void }) {
               onClick={callEmergency}
               className="inline-flex items-center gap-2 rounded-lg bg-critical px-6 py-3 font-bold text-critical-foreground hover:opacity-95"
             >
-              <Phone className="h-4 w-4" /> Call 911
+              <Phone className="h-4 w-4" /> Call 112
             </button>
           </div>
 

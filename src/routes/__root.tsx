@@ -1,5 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
+import { I18nProvider } from "@/lib/i18n";
+import { AuthProvider } from "@/lib/firebase";
 
 function NotFoundComponent() {
   return (
@@ -26,14 +28,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Responder AI — Emergency First Response Guide" },
+      { title: "Rapid Aid — Emergency First Response Guide" },
       { name: "description", content: "Step-by-step first aid guidance for emergencies. CPR, choking, bleeding and more." },
       { name: "theme-color", content: "#0e1420" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
-  component: () => <Outlet />,
+  component: () => <AuthProvider><I18nProvider><Outlet /></I18nProvider></AuthProvider>,
   notFoundComponent: NotFoundComponent,
 });
 

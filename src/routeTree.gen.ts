@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as KnowledgeRouteImport } from './routes/knowledge'
 import { Route as GuidanceRouteImport } from './routes/guidance'
 import { Route as AlertsRouteImport } from './routes/alerts'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
 const KnowledgeRoute = KnowledgeRouteImport.update({
@@ -29,6 +30,11 @@ const AlertsRoute = AlertsRouteImport.update({
   path: '/alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/alerts': typeof AlertsRoute
   '/guidance': typeof GuidanceRoute
   '/knowledge': typeof KnowledgeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/alerts': typeof AlertsRoute
   '/guidance': typeof GuidanceRoute
   '/knowledge': typeof KnowledgeRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/alerts': typeof AlertsRoute
   '/guidance': typeof GuidanceRoute
   '/knowledge': typeof KnowledgeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/alerts' | '/guidance' | '/knowledge'
+  fullPaths: '/' | '/admin' | '/alerts' | '/guidance' | '/knowledge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alerts' | '/guidance' | '/knowledge'
-  id: '__root__' | '/' | '/alerts' | '/guidance' | '/knowledge'
+  to: '/' | '/admin' | '/alerts' | '/guidance' | '/knowledge'
+  id: '__root__' | '/' | '/admin' | '/alerts' | '/guidance' | '/knowledge'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AlertsRoute: typeof AlertsRoute
   GuidanceRoute: typeof GuidanceRoute
   KnowledgeRoute: typeof KnowledgeRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AlertsRoute: AlertsRoute,
   GuidanceRoute: GuidanceRoute,
   KnowledgeRoute: KnowledgeRoute,
