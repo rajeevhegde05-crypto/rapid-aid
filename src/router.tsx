@@ -61,6 +61,7 @@ export const getRouter = () => {
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
+    basepath: import.meta.env.VITE_BASE_PATH || '/',
   });
 
   return router;
